@@ -1,5 +1,5 @@
 
-import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -48,9 +48,15 @@ public class Principal {
                         double c = scanner1.nextDouble();
                         Temperature temperatura = new Temperature(c, 'K');
                         temperatura.setTempK(c);
+                        System.out.println("");
                         System.out.println(temperatura.toString());                                          
                         
+                    } catch (InputMismatchException e){
+                        System.out.println("");
+                        System.out.println("Valor numérico no válido "); 
+                        System.out.println("");
                     } catch (IllegalTemperatureException e) {
+                        System.out.println("");
                         System.out.println(e.getMessage());
                     }
                     
@@ -64,11 +70,15 @@ public class Principal {
                         double cel = scanner1.nextDouble();
                         Temperature temperatura1 = new Temperature(cel, 'C');
                         temperatura1.setTempC(cel);
+                        System.out.println("");
                         System.out.println(temperatura1.toString());
+                    } catch(InputMismatchException e){
+                        System.out.println("");
+                        System.out.println("Valor numérico no válido");
+                        System.out.println("");
                     } catch (IllegalTemperatureException e) {
                         System.out.println(e.getMessage());
-                    }
-                    
+                    }                    
                     break;
 
                 case "E":

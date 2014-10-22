@@ -26,6 +26,7 @@ public class Temperature {
     
     public void setTempK(double tempK) throws IllegalTemperatureException {
         if (tempK < 0){
+            System.out.println("");
             throw new IllegalTemperatureException ("No existen valores de Kº menores a 0");
         } else{
              this.tempK = tempK;
@@ -35,6 +36,7 @@ public class Temperature {
 
     public void setTempC(double tempC) throws IllegalTemperatureException {
         if (tempC < -273.15){
+            System.out.println("");
             throw new IllegalTemperatureException ("No existen valores de Cº menores a -273.15");            
         } else{
         this.tempC = tempC;
