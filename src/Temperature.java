@@ -26,14 +26,20 @@ public class Temperature {
     
     public void setTempK(double tempK) throws IllegalTemperatureException {
         if (tempK < 0){
-            throw new IllegalTemperatureException ("A");
+            throw new IllegalTemperatureException ("No existen valores de Kº menores a 0");
         } else{
-             this.tempK = tempK;        
+             this.tempK = tempK;
+             this.tempC = tempK - 273.15;
         }
     }
 
-    public void setTempC(double tempC) {
+    public void setTempC(double tempC) throws IllegalTemperatureException {
+        if (tempC < -273.15){
+            throw new IllegalTemperatureException ("No existen valores de Cº menores a -273.15");            
+        } else{
         this.tempC = tempC;
+        this.tempK = tempC + 273.15;
+        }
     }
 
     public double getTempK() {
@@ -43,4 +49,9 @@ public class Temperature {
     public double getTempC() {
         return tempC;
     }   
+
+    @Override
+    public String toString() {
+        return "Temperature{" + "kelvin=" + tempK + ", Celsius=" + tempC + '}';
+    }  
 }

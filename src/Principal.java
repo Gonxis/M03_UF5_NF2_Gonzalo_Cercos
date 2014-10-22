@@ -1,5 +1,8 @@
 
+import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -16,12 +19,9 @@ public class Principal {
      */
     
     //Las comas, no se pueden poner puntos para el decimal --> Exception
-    //El salir, has de introducir la tecla E/e para salir (preguntar sobre el resto de teclas.. case otherwase: Salir) --> Exception
-    //Los K menores a 0, controlar la excepción IllegalTemperatureException y que muestre error si introduce valores por debajo de 
-        //los permitidos
+    
     public static void main(String[] args) throws IllegalTemperatureException {
         String op = "";
-//        String m = "";
         Scanner scanner = new Scanner(System.in);
         Scanner scanner1 = new Scanner(System.in);
         do {
@@ -32,50 +32,56 @@ public class Principal {
             System.out.println("Opción E/e: Salir");
             System.out.println("");
             System.out.print("Indica la opción que desea hacer: ");
-            op = scanner.next();
+
+            try {
+                op = scanner.next();
+            } catch (NoSuchElementException e) {
+                System.out.println("");
+                System.out.println("Valor de caracter no reconocido. Se necesita una C, una K ó una E");
+            } 
             
-//            try {
-//                
-//            } catch (IllegalTemperatureException e) {
-//                throw new IllegalTemperatureException(m);
-//            }
-            
-            switch (op) {
-                case "k":
+            switch (op.toUpperCase()) {
                 case "K":
-
-                    System.out.println("");
-                    System.out.print("Introduce los grados K que quieres pasar a Cº: ");
-                    double c = scanner1.nextDouble();
-                    Temperature a = new Temperature(c, 'K');
-
-                    System.out.println("");
-                    System.out.println("La temperatura en K = " + a.getTempK());
-                    System.out.println("La temperatura en Cº = " + (a.getTempK() - 273.15));
-                    System.out.println("");
-
-
+                    try {
+                        System.out.println("");
+                        System.out.print("Introduce los grados K que quieres pasar a Cº: ");
+                        double c = scanner1.nextDouble();
+                        Temperature temperatura = new Temperature(c, 'K');
+                        temperatura.setTempK(c);
+                        System.out.println(temperatura.toString());                                          
+                        
+                    } catch (IllegalTemperatureException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    
                     break;
-                case "c":
+
                 case "C":
-                    System.out.println("");
-                    System.out.print("Introduce los grados Cº que quieres pasar a K: ");
-                    double d = scanner1.nextDouble();
-                    Temperature b = new Temperature(d, 'C');
-
-                    System.out.println("");
-                    System.out.println("La temperatura en Cº = " + b.getTempC());
-                    System.out.println("La temperatura en K  = " + (b.getTempC() + 273.15));
-                    System.out.println("");
+                    
+                    try {
+                        System.out.println("");
+                        System.out.print("Introduce los grados Cº que quieres pasar a K: ");
+                        double cel = scanner1.nextDouble();
+                        Temperature temperatura1 = new Temperature(cel, 'C');
+                        temperatura1.setTempC(cel);
+                        System.out.println(temperatura1.toString());
+                    } catch (IllegalTemperatureException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    
                     break;
-                case "e":
+
                 case "E":
                     System.out.println("");
                     System.out.println("Bye bye");
                     System.out.println("");
                     break;
+                default:
+                    System.out.println("");
+                    System.out.println("Error al introducir opción, se necesita letra C, K ó E");
+                    break;
             }
 
-        } while (op.equals("E") && op.equals("e"));
+        } while (!op.equalsIgnoreCase("E"));
     }
 }

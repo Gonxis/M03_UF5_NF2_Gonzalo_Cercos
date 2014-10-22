@@ -10,7 +10,7 @@
 public class IllegalTemperatureException extends Exception {
 
 
-    public IllegalTemperatureException(String a) {
-        System.out.println("No existen valores de Kº menores a 0");
+    public IllegalTemperatureException(String message) {
+        super(message);
     }
 }
