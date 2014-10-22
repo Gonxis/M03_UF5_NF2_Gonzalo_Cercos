@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 /**
  *
- * @author gonchicrcos
+ * @author Gonxi's
  */
 public class Principal {
 
